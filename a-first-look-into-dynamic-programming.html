@@ -87,7 +87,7 @@
   <header>
     <h1 id="a-first-look-into-dynamic-programming">A first look into Dynamic Programming</h1>
     <p>
-          Posted on jeu. 19 janvier 2017 in <a href="https://nightowl97.github.io/category/programming.html">Programming</a>
+          Posted on Thu 19 January 2017 in <a href="https://nightowl97.github.io/category/programming.html">Programming</a>
 
 
     </p>
@@ -114,11 +114,9 @@ We'll only talk about one of its simplest applications for now, just to dip our 
 you see and understand this, it seems brilliant, elegant and pretty much perfect. But with a deeper look, this algorithm is actually going to turn out to be pretty bad.
 I'm not going to talk about whether Recursion is <em>inherently</em> good or bad. If that's what you're interested in, I'll just refer you to this <a href="http://stackoverflow.com/a/3093/4203245">Stack Overflow answer.</a>
 First, try and run this function for a big enough n, say 100 for example. It's going to take a
-<em>very long</em> time. This is the timing <code>fib(40)</code> and <code>fib(100)</code> in a python 2 interpreter:</p>
+<em>very long</em> time. This is the timing <code>fib(40)</code> in a python 2 interpreter:</p>
 <div class="highlight"><pre><span></span><span class="n">fib</span><span class="p">(</span><span class="mi">40</span><span class="p">):</span> <span class="mi">102334155</span>
 <span class="o">---</span> <span class="mf">80.5310001373</span> <span class="n">seconds</span> <span class="o">---</span>
-<span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-<span class="o">---</span>  <span class="n">seconds</span> <span class="o">---</span>
 </pre></div>
 
 
@@ -165,7 +163,7 @@ Whenever the <code>fib</code> function is called, we will store its result in me
 The "subproblems" in our case are the all the  <code>fib(k)</code>s where <code>k &lt; n</code> and we stored the result of each subproblem in memory for eventual reuse. It's also pretty clear that <code>T(n) = Time for each subproblem * Number of subproblems</code>
 If you try and run this, you're going to notice a gigantic jump in performance because this is now a linear time algorithm O(n).
 So much so that even I had the patience to wait for it to calculate the 500-th number:</p>
-<div class="highlight"><pre><span></span><span class="n">answer</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span> <span class="mi">139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125</span>
+<div class="highlight"><pre><span></span><span class="n">fib</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span> <span class="mi">139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125</span>
 <span class="o">---</span> <span class="mf">0.00100016593933</span> <span class="n">seconds</span> <span class="o">---</span>
 </pre></div>
 
@@ -175,7 +173,7 @@ So much so that even I had the patience to wait for it to calculate the 500-th n
 <p>That's pretty much the idea of dynamic programming: Recursion + Memory.
 Our algorithm worked its way down the tree starting from the top, but there's also <em>Bottom-up Dynamic Programming</em> which, as you might expect, works its way from the bottom. It's also pretty simple to implement, especially for something as easy as fibonacci, but that's something I'll let you do yourself.</p>
 <h3>Conclusion</h3>
-<p>That was a pretty good improvement, but it's possible to do even better. Our algorithm might still cause maximum recursion depth errors, and it's possible to make a logarithmic time O(log n) algorithm using the closed form for fibonacci numbers, also known as Binet's formula:</p>
+<p>That was a pretty good improvement, but it's possible to do even better. Our algorithm will still cause a maximum recursion depth error for a very big <code>n</code>, and it's possible to make a logarithmic time O(log n) algorithm using the closed form for fibonacci numbers, also known as Binet's formula:</p>
 <p><code>fib(n) = Floor([Phiⁿ / sqrt(5)] + 1/2)</code>  where Phi is the gloden ratio</p>
 <p>You might think this is constant time but due to the powers in the formula, we need to use the <code>math.pow()</code> function, which is not O(1) like the usual addition and multiplication operations.
 It's also worth noting that this method is subject to floating point errors during computations with big numbers, so your results might be slightly off if you decide to try it for yourself.</p>
@@ -195,12 +193,22 @@ It's also worth noting that this method is subject to floating point errors duri
 </article>
 
     <footer>
-<p>&copy; Youssef </p>
+<p>&copy; Youssef Khar </p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p>    </footer>
   </main>
 
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-93950313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
 
 
 

@@ -18,11 +18,9 @@ We'll only talk about one of its simplest applications for now, just to dip our 
 you see and understand this, it seems brilliant, elegant and pretty much perfect. But with a deeper look, this algorithm is actually going to turn out to be pretty bad.
 I'm not going to talk about whether Recursion is &lt;em&gt;inherently&lt;/em&gt; good or bad. If that's what you're interested in, I'll just refer you to this &lt;a href="http://stackoverflow.com/a/3093/4203245"&gt;Stack Overflow answer.&lt;/a&gt;
 First, try and run this function for a big enough n, say 100 for example. It's going to take a
-&lt;em&gt;very long&lt;/em&gt; time. This is the timing &lt;code&gt;fib(40)&lt;/code&gt; and &lt;code&gt;fib(100)&lt;/code&gt; in a python 2 interpreter:&lt;/p&gt;
+&lt;em&gt;very long&lt;/em&gt; time. This is the timing &lt;code&gt;fib(40)&lt;/code&gt; in a python 2 interpreter:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;102334155&lt;/span&gt;
 &lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;80.5310001373&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
-&lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;span class="o"&gt;---&lt;/span&gt;  &lt;span class="n"&gt;seconds&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -69,7 +67,7 @@ Whenever the &lt;code&gt;fib&lt;/code&gt; function is called, we will store its 
 The "subproblems" in our case are the all the  &lt;code&gt;fib(k)&lt;/code&gt;s where &lt;code&gt;k &amp;lt; n&lt;/code&gt; and we stored the result of each subproblem in memory for eventual reuse. It's also pretty clear that &lt;code&gt;T(n) = Time for each subproblem * Number of subproblems&lt;/code&gt;
 If you try and run this, you're going to notice a gigantic jump in performance because this is now a linear time algorithm O(n).
 So much so that even I had the patience to wait for it to calculate the 500-th number:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;answer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125&lt;/span&gt;
 &lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;0.00100016593933&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -79,7 +77,7 @@ So much so that even I had the patience to wait for it to calculate the 500-th n
 &lt;p&gt;That's pretty much the idea of dynamic programming: Recursion + Memory.
 Our algorithm worked its way down the tree starting from the top, but there's also &lt;em&gt;Bottom-up Dynamic Programming&lt;/em&gt; which, as you might expect, works its way from the bottom. It's also pretty simple to implement, especially for something as easy as fibonacci, but that's something I'll let you do yourself.&lt;/p&gt;
 &lt;h3&gt;Conclusion&lt;/h3&gt;
-&lt;p&gt;That was a pretty good improvement, but it's possible to do even better. Our algorithm might still cause maximum recursion depth errors, and it's possible to make a logarithmic time O(log n) algorithm using the closed form for fibonacci numbers, also known as Binet's formula:&lt;/p&gt;
+&lt;p&gt;That was a pretty good improvement, but it's possible to do even better. Our algorithm will still cause a maximum recursion depth error for a very big &lt;code&gt;n&lt;/code&gt;, and it's possible to make a logarithmic time O(log n) algorithm using the closed form for fibonacci numbers, also known as Binet's formula:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;fib(n) = Floor([Phiⁿ / sqrt(5)] + 1/2)&lt;/code&gt;  where Phi is the gloden ratio&lt;/p&gt;
 &lt;p&gt;You might think this is constant time but due to the powers in the formula, we need to use the &lt;code&gt;math.pow()&lt;/code&gt; function, which is not O(1) like the usual addition and multiplication operations.
 It's also worth noting that this method is subject to floating point errors during computations with big numbers, so your results might be slightly off if you decide to try it for yourself.&lt;/p&gt;
