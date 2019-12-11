@@ -1,125 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Night Owl Blog</title><link href="https://nightowl97.github.io/" rel="alternate"></link><link href="https://nightowl97.github.io/feeds/all.atom.xml" rel="self"></link><id>https://nightowl97.github.io/</id><updated>2017-01-19T14:00:00+00:00</updated><entry><title>A first look into Dynamic Programming</title><link href="https://nightowl97.github.io/a-first-look-into-dynamic-programming.html" rel="alternate"></link><published>2017-01-19T14:00:00+00:00</published><updated>2017-01-19T14:00:00+00:00</updated><author><name>Youssef</name></author><id>tag:nightowl97.github.io,2017-01-19:/a-first-look-into-dynamic-programming.html</id><summary type="html">&lt;p&gt;Very simple application of Dynamic Programming&lt;/p&gt;</summary><content type="html">&lt;p&gt;Something I didn't know existed until recently is &lt;em&gt;Dynamic Programming&lt;/em&gt;. If, like me,
-you knew computer scientists use a lot of different techniques to optimize their algorithms,
-but were intimidated by the &lt;a href="https://en.wikipedia.org/wiki/Mathematical_optimization#Major_subfields"&gt;Wikipedia article&lt;/a&gt;, then this article is for you.
-Dynamic Programming is pretty straightforward, even if it sounds imposing and scary. I've looked around trying to find why it's called what it is, and the reasons are mostly because it sounds impressive.
-We'll only talk about one of its simplest applications for now, just to dip our toes in the water.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Youssef's Thoughts</title><link href="https://nightowl97.github.io/" rel="alternate"></link><link href="https://nightowl97.github.io/feeds/all.atom.xml" rel="self"></link><id>https://nightowl97.github.io/</id><updated>2017-01-19T00:00:00+00:00</updated><subtitle>Personal notes and writings</subtitle><entry><title>A first look into Dynamic Programming</title><link href="https://nightowl97.github.io/a-first-look-into-dynamic-programming.html" rel="alternate"></link><published>2017-01-19T00:00:00+00:00</published><updated>2017-01-19T00:00:00+00:00</updated><author><name>Youssef Kharchouf</name></author><id>tag:nightowl97.github.io,2017-01-19:/a-first-look-into-dynamic-programming.html</id><summary type="html">&lt;p&gt;Very simple application of Dynamic Programming&lt;/p&gt;</summary><content type="html">&lt;p&gt;Something I didn't know existed until recently
+is &lt;em&gt;Dynamic Programming&lt;/em&gt;. If, like me, you knew
+computer scientists use a lot of different
+techniques to optimize their algorithms, but
+were intimidated by the &lt;a href="https://en.wikipedia.org/wiki/Mathematical_optimization#Major_subfields"&gt;Wikipedia article&lt;/a&gt;
+, then this article is for you. Dynamic Programming is
+pretty straightforward, even if it sounds
+imposing and scary. I've looked around trying to
+find why it's called what it is, and the reasons
+are mostly because it sounds impressive. We'll
+only talk about one of its simplest applications
+for now, just to dip our toes in the water.&lt;/p&gt;
 &lt;h3&gt;A simple recursive algorithm:&lt;/h3&gt;
-&lt;p&gt;If you ever took a programming/CS course, then at some point you must have learned about recursion. One of the common first examples you learn about is this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;p&gt;If you ever took a programming/CS course, then
+at some point you must have learned about
+recursion. One of the common first examples you
+learn about is this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This function clearly gives you the &lt;code&gt;n&lt;/code&gt;-th number in the famous Fibonacci sequence. The first time
-you see and understand this, it seems brilliant, elegant and pretty much perfect. But with a deeper look, this algorithm is actually going to turn out to be pretty bad.
-I'm not going to talk about whether Recursion is &lt;em&gt;inherently&lt;/em&gt; good or bad. If that's what you're interested in, I'll just refer you to this &lt;a href="http://stackoverflow.com/a/3093/4203245"&gt;Stack Overflow answer.&lt;/a&gt;
-First, try and run this function for a big enough n, say 100 for example. It's going to take a
-&lt;em&gt;very long&lt;/em&gt; time. This is the timing &lt;code&gt;fib(40)&lt;/code&gt; in a python 2 interpreter:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;102334155&lt;/span&gt;
-&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;80.5310001373&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;p&gt;This function clearly gives you the &lt;code&gt;n&lt;/code&gt;-th number
+in the famous Fibonacci sequence. The first time
+you see and understand this, it seems brilliant,
+elegant and pretty much perfect. But with a
+deeper look, this algorithm is actually going
+to turn out to be pretty bad. I'm not going to
+talk about whether Recursion is inherently good
+or bad. If that's what you're interested in,
+I'll just refer you to this &lt;a href="http://stackoverflow.com/a/3093/4203245"&gt;Stack Overflow answer&lt;/a&gt;.
+First, try and run this function for a big enough
+n, say 100 for example. It's going to take a very
+long time. This is the timing &lt;code&gt;fib(40)&lt;/code&gt; in a python
+2 interpreter:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;102334155&lt;/span&gt;
+    &lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;80.5310001373&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The time it takes doesn't increase linearly with &lt;code&gt;n&lt;/code&gt;, this algorithm takes exponential time. I'm sure you can understand if I don't have the patience to wait for it to calculate a higher number.&lt;/p&gt;
+&lt;p&gt;The time it takes doesn't increase linearly with
+n, this algorithm takes exponential time. I'm
+sure you can understand if I don't have the
+patience to wait for it to calculate a higher
+number.&lt;/p&gt;
 &lt;h3&gt;Here's why it's slow:&lt;/h3&gt;
-&lt;p&gt;As an example, let's take a look at the recursion tree when we compute &lt;code&gt;fib(6)&lt;/code&gt;:
-&lt;img alt="Recursion Tree" src="http://www2.hawaii.edu/~janst/311/Notes/Topic-22/Fig-27-1-Fib-Recursion-Tree-Small.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;Each node represents a function call, and as you can see, we call:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;fib(4)&lt;/code&gt; Twice&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;fib(3)&lt;/code&gt; 3 times&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;fib(2)&lt;/code&gt; 5 times&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In fact every call on the right side of the tree has already been computed in the left side, and yet our function will recompute each call as if it's never seen it before. Imagine if we had a big number, we'd have to call the function on the same big numbers multiple times, calls on small &lt;code&gt;n&lt;/code&gt;s will happen at least a few hundred thousand times.
-That means a lot of clock cycles wasted on redundant and completely unnecessary calculations.
-If &lt;code&gt;T(n)&lt;/code&gt; is the time it takes to calculate the &lt;code&gt;fib(n)&lt;/code&gt; then:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;T(n) = T(n - 1) + T(n - 2) = T(n - 2) + T(n - 3) + T(n - 3) + T(n - 4) etc&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;And so forth, each step calling T twice, which means: &lt;code&gt;T(n) = 2 * 2 * 2 *...* 2 = 2ⁿ&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;This is a time complexity &lt;code&gt;O(2ⁿ)&lt;/code&gt; hence an exponential time algorithm. If you can help it, you should always try to avoid exponential time, because it is very costly as you can see from the diagram:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Time complexity" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Comparison_computational_complexity.svg/512px-Comparison_computational_complexity.svg.png"&gt;&lt;/p&gt;
-&lt;p&gt;One last thing. Every time a recursive call happens, it takes a bit of memory from the call stack. The amount that is taken is called the stackframe, and is only freed when the function returns. In a low level language, deep recursion will eat up all the memory and cause a stack overflow. High level languages usually have some sort of guards against this. In python for example, you'll cause a maximum recursion depth error. Sure you can get around these guards, but they are there for a reason, and you'll rarely be justified in circumventing them.&lt;/p&gt;
+&lt;p&gt;As an example, let's take a look at the
+recursion tree when we compute &lt;code&gt;fib(6)&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="tree" src="images/tree.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Each node represents a function call,
+and as you can see, we call:
+- &lt;code&gt;fib(4)&lt;/code&gt; Twice
+- &lt;code&gt;fib(3)&lt;/code&gt; 3 times
+- &lt;code&gt;fib(2)&lt;/code&gt; 5 times&lt;/p&gt;
+&lt;p&gt;In fact every call on the right side of the
+tree has already been computed in the left
+side, and yet our function will recompute each
+call as if it's never seen it before. Imagine
+if we had a big number, we'd have to call the
+function on the same big numbers multiple times,
+calls on small ns will happen at least a few
+hundred thousand times. That means a lot of
+clock cycles wasted on redundant and completely
+unnecessary calculations. If &lt;code&gt;T(n)&lt;/code&gt; is the time
+it takes to calculate the &lt;code&gt;fib(n)&lt;/code&gt; then:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;T(n) = T(n - 1) + T(n - 2) = T(n - 2) + T(n - 3) + T(n - 3) + T(n - 4) ...&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And so forth, each step calling T twice, which
+means: &lt;code&gt;T(n) = 2 * 2 * 2 * ... * 2 = 2ⁿ&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This is a time complexity &lt;code&gt;O(2ⁿ)&lt;/code&gt; hence an
+exponential time algorithm. If you can help it,
+you should always try to avoid exponential time,
+because it is very costly as you can see from the
+diagram:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="comp" src="images/complexity.png"&gt;&lt;/p&gt;
+&lt;p&gt;One last thing. Every time a recursive call
+happens, it takes a bit of memory from the call
+stack. The amount that is taken is called the
+stackframe, and is only freed when the function
+returns. In a low level language, deep recursion
+will eat up all the memory and cause a stack
+overflow. High level languages usually have some
+sort of guards against this. In python for
+example, you'll cause a maximum recursion depth
+error. Sure you can get around these guards, but
+they are there for a reason, and you'll rarely
+be justified in circumventing them.&lt;/p&gt;
 &lt;h3&gt;The Dynamic Programming approach:&lt;/h3&gt;
-&lt;p&gt;The second to last 'subfield' in the previously mentioned &lt;a href="https://en.wikipedia.org/wiki/Mathematical_optimization#Major_subfields"&gt;article&lt;/a&gt; is Dynamic Programming. It says:&lt;/p&gt;
+&lt;p&gt;The second to last 'subfield' in the previously
+mentioned &lt;a href="https://en.wikipedia.org/wiki/Mathematical_optimization#Major_subfields"&gt;article&lt;/a&gt;
+is Dynamic Programming. It says:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Dynamic programming studies the case in which the optimization strategy is based on splitting the problem into smaller subproblems. The equation that describes the relationship between these subproblems is called the Bellman equation.&lt;/p&gt;
+&lt;p&gt;Dynamic programming studies the case in which
+the optimization strategy is based on splitting
+the problem into smaller subproblems. The
+equation that describes the relationship
+between these subproblems is called the Bellman
+equation.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;The splitting-a-problem-into-subproblems part seems simple enough in principle, but how is that actually done?
-The problem with the first algorithm is the repetition. Each recursive call is costly, so we should only have to calculate each &lt;code&gt;n&lt;/code&gt;-th number once. First thing that comes to mind is to just save each &lt;code&gt;fib(n)&lt;/code&gt; we compute, and cut off the recursion if we ever call the function on that same &lt;code&gt;n&lt;/code&gt; later. Seems simple right? That's exactly the way we're going to do it.
-Whenever the &lt;code&gt;fib&lt;/code&gt; function is called, we will store its result in memory. Later when it's called with the same argument again, instead of recursing for a second time (again and again down to the base case), we just need to pull the result that we already stored in memory. This is going to make for a much better algorithm, and that's because reading from memory takes constant time, not exponential time (essentially free). Here's a possible implementation:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mem&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;mem&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;        &lt;span class="c1"&gt;# If we&amp;#39;ve already computed it&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;mem&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;   &lt;span class="c1"&gt;# then just return that&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                          &lt;span class="c1"&gt;# These lines&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;                        &lt;span class="c1"&gt;# are still&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                               &lt;span class="c1"&gt;# pretty much&lt;/span&gt;
-        &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# the same&lt;/span&gt;
-        &lt;span class="n"&gt;mem&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;            &lt;span class="c1"&gt;# Store this result for eventual reuse&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;              &lt;span class="c1"&gt;# And now you can return the result.&lt;/span&gt;
+&lt;p&gt;The splitting-a-problem-into-subproblems part
+seems simple enough in principle, but how is
+that actually done? The problem with the first
+algorithm is the repetition. Each recursive
+call is costly, so we should only have to
+calculate each &lt;code&gt;n&lt;/code&gt;-th number once. First thing
+that comes to mind is to just save each &lt;code&gt;fib(n)&lt;/code&gt;
+we compute, and cut off the recursion if we ever
+call the function on that same &lt;code&gt;n&lt;/code&gt; later. Seems
+simple right? That's exactly the way we're going
+to do it. Whenever the &lt;code&gt;fib&lt;/code&gt; function is called,
+we will store its result in memory. Later when
+it's called with the same argument again,
+instead of recursing for a second time (again
+and again down to the base case), we just need
+to pull the result that we already stored in
+memory. This is going to make for a much better
+algorithm, and that's because reading from
+memory takes constant time, not exponential
+time (essentially free). Here's a possible
+implementation:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;mem&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;mem&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;        &lt;span class="c1"&gt;# If we&amp;#39;ve already computed it&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;mem&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;   &lt;span class="c1"&gt;# then just return that&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                          &lt;span class="c1"&gt;# These lines&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;                        &lt;span class="c1"&gt;# are still&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                               &lt;span class="c1"&gt;# pretty much&lt;/span&gt;
+            &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# the same&lt;/span&gt;
+            &lt;span class="n"&gt;mem&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;            &lt;span class="c1"&gt;# Store this result for eventual reuse&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;              &lt;span class="c1"&gt;# And now you can return the result.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;In dynamic programming, we solve all the subproblems and use their results to solve our main problem.
-The "subproblems" in our case are the all the  &lt;code&gt;fib(k)&lt;/code&gt;s where &lt;code&gt;k &amp;lt; n&lt;/code&gt; and we stored the result of each subproblem in memory for eventual reuse. It's also pretty clear that &lt;code&gt;T(n) = Time for each subproblem * Number of subproblems&lt;/code&gt;
-If you try and run this, you're going to notice a gigantic jump in performance because this is now a linear time algorithm O(n).
-So much so that even I had the patience to wait for it to calculate the 500-th number:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125&lt;/span&gt;
-&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;0.00100016593933&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;p&gt;In dynamic programming, we solve all the
+subproblems and use their results to solve
+our main problem. The "subproblems" in our
+case are the all the &lt;code&gt;fib(k)&lt;/code&gt;s where &lt;code&gt;k &amp;lt; n&lt;/code&gt; and
+we stored the result of each subproblem in
+memory for eventual reuse. It's also pretty
+clear that &lt;code&gt;T(n) = Time for each subproblem *
+Number of subproblems&lt;/code&gt;. If you try and run this,
+you're going to notice a gigantic jump in
+performance because this is now a linear time
+algorithm O(n). So much so that even I had
+the patience to wait for it to calculate the
+500-th number:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125&lt;/span&gt;
+    &lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;0.00100016593933&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="It's blazing fast" src="https://i.imgur.com/op9PWrr.gif"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ndt" src="images/ndt.gif"&gt;&lt;/p&gt;
 &lt;p&gt;That was a pretty big number and it did it in roughly 1 millisecond? Hey, that's pretty good!&lt;/p&gt;
-&lt;p&gt;That's pretty much the idea of dynamic programming: Recursion + Memory.
-Our algorithm worked its way down the tree starting from the top, but there's also &lt;em&gt;Bottom-up Dynamic Programming&lt;/em&gt; which, as you might expect, works its way from the bottom. It's also pretty simple to implement, especially for something as easy as fibonacci, but that's something I'll let you do yourself.&lt;/p&gt;
+&lt;p&gt;That's pretty much the idea of dynamic
+programming: Recursion + Memory. Our algorithm
+worked its way down the tree starting from the
+top, but there's also Bottom-up Dynamic
+Programming which, as you might expect, works
+its way from the bottom. It's also pretty simple
+to implement, especially for something as easy
+as fibonacci, but that's something I'll let you
+do yourself.&lt;/p&gt;
 &lt;h3&gt;Conclusion&lt;/h3&gt;
-&lt;p&gt;That was a pretty good improvement, but it's possible to do even better. Our algorithm will still cause a maximum recursion depth error for a very big &lt;code&gt;n&lt;/code&gt;, and it's possible to make a logarithmic time O(log n) algorithm using the closed form for fibonacci numbers, also known as Binet's formula:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;fib(n) = Floor([Phiⁿ / sqrt(5)] + 1/2)&lt;/code&gt;  where Phi is the gloden ratio&lt;/p&gt;
-&lt;p&gt;You might think this is constant time but due to the powers in the formula, we need to use the &lt;code&gt;math.pow()&lt;/code&gt; function, which is not O(1) like the usual addition and multiplication operations.
-It's also worth noting that this method is subject to floating point errors during computations with big numbers, so your results might be slightly off if you decide to try it for yourself.&lt;/p&gt;
-&lt;p&gt;That's about it for now, I hope you learned something with me today.&lt;/p&gt;</content><category term="Python"></category><category term="Dynamic Programming"></category><category term="Recursion"></category></entry><entry><title>What would happen if aliens attack</title><link href="https://nightowl97.github.io/what-would-happen-if-aliens-attack.html" rel="alternate"></link><published>2017-01-19T14:00:00+00:00</published><updated>2017-01-19T14:00:00+00:00</updated><author><name>Youssef</name></author><id>tag:nightowl97.github.io,2017-01-19:/what-would-happen-if-aliens-attack.html</id><summary type="html">&lt;p&gt;What would happen if aliens tried to attack planet Earth with a black hole made of light?&lt;/p&gt;</summary><content type="html">&lt;h3&gt;What's a kugelblitz, you say?&lt;/h3&gt;
+&lt;p&gt;That was a pretty good improvement, but it's
+possible to do even better. Our algorithm will
+still cause a maximum recursion depth error
+for a very big n, and it's possible to make a
+logarithmic time O(log n) algorithm using the
+closed form for fibonacci numbers, also known
+as Binet's formula:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;fib(n) = Floor([Phiⁿ / sqrt(5)] + 1/2)&lt;/code&gt; where
+Phi is the gloden ratio&lt;/p&gt;
+&lt;p&gt;You might think this is constant time but due
+to the powers in the formula, we need to use
+the &lt;code&gt;math.pow()&lt;/code&gt; function, which is not O(1) like
+the usual addition and multiplication operations.
+It's also worth noting that this method is
+subject to floating point errors during
+computations with big numbers, so your results
+might be slightly off if you decide to try it
+for yourself.&lt;/p&gt;
+&lt;p&gt;That's about it for now, I hope you learned
+something with me today.&lt;/p&gt;</content><category term="Programming"></category><category term="Python"></category><category term="Recursion"></category></entry><entry><title>What would happen if aliens attack</title><link href="https://nightowl97.github.io/what-would-happen-if-aliens-attack.html" rel="alternate"></link><published>2017-01-19T00:00:00+00:00</published><updated>2017-01-19T00:00:00+00:00</updated><author><name>Youssef Kharchouf</name></author><id>tag:nightowl97.github.io,2017-01-19:/what-would-happen-if-aliens-attack.html</id><summary type="html">&lt;p&gt;What would happen if aliens tried to attack planet Earth with a Kugelblitz?&lt;/p&gt;</summary><content type="html">&lt;p&gt;What's a kugelblitz, you say?&lt;/p&gt;
 &lt;p&gt;Let's start with the wikipedia definition:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;In theoretical physics, a kugelblitz (German: "ball lightning") is a concentration of light so intense that it forms an event horizon and becomes self-trapped.&lt;/p&gt;
+&lt;p&gt;In theoretical physics, a kugelblitz (German: "ball lightning") is a concentration of light so
+intense that it forms an event horizon and becomes self-trapped.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;That's really the gist of it. In Newtonian gravity, mass is the source of gravitational field. In GR however, it would be the stress-energy tensor. Therefore, theoretially, it makes sense that it is possible to make a blackhole purely out of light. Granted, you would need a &lt;em&gt;lot&lt;/em&gt;, and I mean &lt;em&gt;a lot&lt;/em&gt; of light for that to be possible. It's clear that only a civilization that has mastered the laws of the universe would be able to consider building one.&lt;/p&gt;
-&lt;h5&gt;Penrose diagrams&lt;/h5&gt;
-&lt;p&gt;A Penrose diagram is just a fancy Minkowski diagram. It's got worldlines, future light cones, past light cones, all the cavalry. It's just that Minkowski diagrams are hard to follow and understand when you introduce exciting things that warp space-time. The paths of light bend and the light cones' shapes change and it becomes all wibbly-wobbly . This is not the case with the Penrose diagram. Due to something called conformal transformation, (I'll have to learn more about this myself later, but not knowing what that is won't stop us from using the diagram.) light paths stay at 45 degree angles no matter the space-time geometry. This is very handy with stuff like event horizons and black holes.&lt;/p&gt;
-&lt;h3&gt;Setting up the situation&lt;/h3&gt;
-&lt;p&gt;Imagine a hostile alien civilisation that is indeed capable of building and weaponizing a Kugelblitz. They, for some reason, are pissed with us and they have a fleet of spaceships placed at equidistant (equidistant.. so grown up!) intervals around the solar system. These spaceships would collectively launch beams of light that would form a shell that converges on planet Earth. The energy from this pulse of light is enough to make a black hole, but it needs to move into a small enough region in space for the event horizon to actually form and the light to trap itself -and us with it-.
-Also, let's assume there is no obi wan to help us in this situation.&lt;/p&gt;
-&lt;h3&gt;Earth is doomed&lt;/h3&gt;
-&lt;p&gt;I will be (badly) drawing Penrose diagrams in order to describe the situation. Because I can only draw on 2 dimensional paper, I am going to use one dimension for time, and one for space, nothing unusual so far. the pulse will be represented as two converging beams coming from the left and the right, essentially trapping Earth in its one spacial dimension universe. Also, two enemy spaceships on each side of Earth would suffice to represent the sphere of spaceships that would be used in actual 3D space. If you think this is cheating, try to project a sphere (3 dimensions) onto a line (1 dimension). If you do the projection down the middle (not the special case of a tangent), you'll get two intersection points, hence two spaceships. Here's the what the situation would look like:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Penrose 1" src="/images/kugel1.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;Before the pulse of light enters the solar system, things would be pretty normal on planet Earth. Humanity will be completely unaware of its impending doom. The beams of light are moving at &lt;code&gt;c&lt;/code&gt;, obviously. Which is why they are at a 45 degree angles in the diagram.&lt;/p&gt;
-&lt;p&gt;When the beams have moved into a small enough region, the event horizon will form. Cutting Earth off from the rest of the universe. Believe it or not, Earth would still not notice anything for a short time after the event horizon forms. This is because the supposed force carrier of gravity would also move at &lt;code&gt;c&lt;/code&gt;, which is the same speed as the converging beams.
-Here's the Penrose diagram when the event horizon forms.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Penrose 2" src="/images/kugel2.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;Since the diagram would be symmetrical, and hand-drawing the lines of equal distances and times is difficult, I simply focused on the right side of the diagram. Drawing the flipped left side of the diagram is trivial and is left as an exercise for the reader. (I'm sorry but I've always wanted to be evil and write this somewhere)&lt;/p&gt;
-&lt;p&gt;The future light cone of Earth is already completely cutoff from the rest of the universe, the space-time geometry below the event horizon has changed (this is represented by space and time switching places in the diagram) and will only allow radially inward trajectories. This would mean that both Earth and the pulses will still inevitably fall towards the singularity. It's the end of humanity, It was fun while it lasted.&lt;/p&gt;
-&lt;p&gt;This is what happens when you introduce a black hole into a Penrose diagram. Intriguingly, the lines of constant space and time switch places, and space is "falling" towards the singularity at angles higher than 45 degrees. The best way I've heard it put is: Trying to avoid the singularity at this point, would be like trying to avoid next Monday. Yes, Mondays suck, but there's no way around them.&lt;/p&gt;
-&lt;p&gt;Also note that I extended the line of the event horizon to include a certain time before the true event horizon has formed. This is because there is a moment before the formation of true event horizon when there is not enough time for the planet to get out of the way even if it could move at the speed of light and miraculously 'phase' through the light pulses.&lt;/p&gt;
-&lt;h3&gt;The Deus Ex Machina&lt;/h3&gt;
-&lt;p&gt;Now imagine that all these events were happening in a movie, and the writer (like all good writers do) decided to introduce a Deus Ex Machina to save humanity.&lt;/p&gt;
-&lt;p&gt;This could be an infinitely strong Dyson sphere, which would appear from a higher dimension and completely cover the Earth-Moon system.&lt;/p&gt;
-&lt;p&gt;The Dyson sphere, even if infinitely strong, is still facing a tall task in order to truly protect the Earth.&lt;/p&gt;
+&lt;p&gt;That's really the gist of it. In Newtonian gravity, mass is the source of gravitational field.
+In GR however, it would be the stress-energy tensor. Therefore, theoretially, it makes sense that
+it is possible to make a blackhole purely out of light. Granted, you would need a lot, and I mean
+a lot of light for that to be possible. It's clear that only a civilization that has mastered the
+laws of the universe would be able to consider building one.&lt;/p&gt;
+&lt;h2&gt;Penrose Diagrams&lt;/h2&gt;
+&lt;p&gt;A Penrose diagram is just a fancy Minkowski diagram. It's got worldlines, future light cones, past
+light cones, all the cavalry. It's just that Minkowski diagrams are hard to follow and understand
+when you introduce exciting things that warp space-time. The paths of light bend and the light cones'
+shapes change and it becomes all wibbly-wobbly . This is not the case with the Penrose diagram. Due to
+something called conformal transformation, (I'll have to learn more about this myself later, but not
+knowing what that is won't stop us from using the diagram.) light paths stay at 45 degree angles no
+matter the space-time geometry. This is very handy with stuff like event horizons and black holes.&lt;/p&gt;
+&lt;h2&gt;Setting up the situation&lt;/h2&gt;
+&lt;p&gt;Imagine a hostile alien civilisation that is indeed capable of building and weaponizing a Kugelblitz.
+They, for some reason, are pissed with us and they have a fleet of spaceships placed at equidistant
+(equidistant.. so grown up!) intervals around the solar system. These spaceships would collectively
+launch beams of light that would form a shell that converges on planet Earth. The energy from this
+pulse of light is enough to make a black hole, but it needs to move into a small enough region in space
+for the event horizon to actually form and the light to trap itself -and us with it-. Also, let's assume
+there is no obi wan to help us in this situation.&lt;/p&gt;
+&lt;h1&gt;Earth is doomed&lt;/h1&gt;
+&lt;p&gt;I will be (badly) drawing Penrose diagrams in order to describe the situation. Because I can only
+draw on 2 dimensional paper, I am going to use one dimension for time, and one for space, nothing
+unusual so far. the pulse will be represented as two converging beams coming from the left and the
+right, essentially trapping Earth in its one spacial dimension universe. Also, two enemy spaceships
+on each side of Earth would suffice to represent the sphere of spaceships that would be used in actual
+3D space. If you think this is cheating, try to project a sphere (3 dimensions) onto a line
+(1 dimension). If you do the projection down the middle (not the special case of a tangent), you'll
+get two intersection points, hence two spaceships. Here's the what the situation would look like:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="kugel1" src="images/kugel1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Before the pulse of light enters the solar system, things would be pretty normal on planet Earth.
+Humanity will be completely unaware of its impending doom. The beams of light are moving at &lt;code&gt;c&lt;/code&gt;,
+obviously. Which is why they are at a 45 degree angles in the diagram.&lt;/p&gt;
+&lt;p&gt;When the beams have moved into a small enough region, the event horizon will form. Cutting Earth off
+from the rest of the universe. Believe it or not, Earth would still not notice anything for a short
+time after the event horizon forms. This is because the supposed force carrier of gravity would also
+move at &lt;code&gt;c&lt;/code&gt;, which is the same speed as the converging beams. Here's the Penrose diagram when the event
+horizon forms.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="kugel2" src="images/kugel2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Since the diagram would be symmetrical, and hand-drawing the lines of equal distances and times is
+difficult, I simply focused on the right side of the diagram. Drawing the flipped left side of the
+diagram is trivial and is left as an exercise for the reader. (I'm sorry but I've always wanted to be
+evil and write this somewhere)&lt;/p&gt;
+&lt;p&gt;The future light cone of Earth is already completely cutoff from the rest of the universe, the
+space-time geometry below the event horizon has changed (this is represented by space and time
+switching places in the diagram) and will only allow radially inward trajectories. This would mean
+that both Earth and the pulses will still inevitably fall towards the singularity. It's the end of
+humanity, It was fun while it lasted.&lt;/p&gt;
+&lt;p&gt;This is what happens when you introduce a black hole into a Penrose diagram. Intriguingly, the lines
+of constant space and time switch places, and space is "falling" towards the singularity at angles
+higher than 45 degrees. The best way I've heard it put is: Trying to avoid the singularity at this
+point, would be like trying to avoid next Monday. Yes, Mondays suck, but there's no way around them.&lt;/p&gt;
+&lt;p&gt;Also note that I extended the line of the event horizon to include a certain time before the true
+event horizon has formed. This is because there is a moment before the formation of true event horizon
+when there is not enough time for the planet to get out of the way even if it could move at the speed
+of light and miraculously 'phase' through the light pulses.&lt;/p&gt;
+&lt;h1&gt;The Deus Ex Machina&lt;/h1&gt;
+&lt;p&gt;Now imagine that all these events were happening in a movie, and the writer (like all good writers do)
+decided to introduce a Deus Ex Machina to save humanity.&lt;/p&gt;
+&lt;p&gt;This could be an infinitely strong Dyson sphere, which would appear from a higher dimension and
+completely cover the Earth-Moon system.&lt;/p&gt;
+&lt;p&gt;The Dyson sphere, even if infinitely strong, is still facing a tall task in order to truly protect
+the Earth.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;In order for it to have a chance, it would need to occupy a region of space that is bigger than the region where the light pulse first forms the event horizon. If the sphere itself is already below the horizon: Inevitable Death (More like a mathematical undefined form because of the sphere's infinite strength but I wouldn't bet my life on what that form means).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The Dyson sphere needs to be light enough so that when the pulse hits it, the mass-energy increase of the sphere from the pulse is not enough to make the Schwarzschild radius too big and have the sphere fall below the resulting event horizon, if that happens : Inevitable death.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It actually needs to be so light that the mass-energy increase wouldn't give it enough gravitational pull to throw the rest of the solar system into chaos. Is it really survival if the solar system goes haywire? Who knows what might hit Earth when it becomes a shooting gallery?&lt;/li&gt;
+&lt;li&gt;In order for it to have a chance, it would need to occupy a region of space that is bigger than
+the region where the light pulse first forms the event horizon. If the sphere itself is already
+below the horizon: Inevitable Death (More like a mathematical undefined form because of the sphere's
+infinite strength but I wouldn't bet my life on what that form means).&lt;/li&gt;
+&lt;li&gt;The Dyson sphere needs to be light enough so that when the pulse hits it, the mass-energy increase
+of the sphere from the pulse is not enough to make the Schwarzschild radius too big and have the sphere
+fall below the resulting event horizon, if that happens : Inevitable death.
+        - It actually needs to be so light that the mass-energy increase wouldn't give it enough
+        gravitational pull to throw the rest of the solar system into chaos. Is it really survival
+        if the solar system goes haywire? Who knows what might hit Earth when it becomes a shooting
+        gallery?&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If, the Dyson sphere satisfies all those, Earth might just make it. Hell, if we got a dyson sphere, we could use the energy from their own attack against them. And humanity lives happily ever after.&lt;/p&gt;
+&lt;p&gt;If, the Dyson sphere satisfies all those, Earth might just make it. Hell, if we got a dyson sphere,
+we could use the energy from their own attack against them. And humanity lives happily ever after.&lt;/p&gt;
 &lt;h3&gt;Epilogue&lt;/h3&gt;
-&lt;p&gt;This 'scenario' is heavily based on a challenge question on the (Excellent) youtube channel: &lt;a href="https://www.youtube.com/channel/UC7_gcs09iThXybpVgjHZ_7g"&gt;PBS SpaceTime&lt;/a&gt;. In fact, I relied entirely on the answer I wrote and sent a few weeks before I started this blog.
-If you watch their challenge video, then you might have noticed that I did not even mention Newton's shell theorem even if it was talked about in the channel.
-Maybe I'm wrong, but I don't think Newton's shell theorem is relevant here at all to the reason Earth doesn't notice anything until the last moment. I've already talked about how the (admittedly theoretical) force carrier of gravity would also move at &lt;code&gt;c&lt;/code&gt; because it's a local phenomenon so the change in the geometry of space time would move &lt;em&gt;along&lt;/em&gt; with the pulse of light. Furthermore, LIGO detected gravitatinal waves directly for the first time just last year, and I'm pretty sure they propagate at &lt;code&gt;c&lt;/code&gt;. I believe that makes my claim stronger, but please notify me if you have an alternative explanation, or a clarification.&lt;/p&gt;</content><category term="Physics"></category><category term="AstroPhysics"></category><category term="Sci-fi"></category><category term="General Relativity"></category><category term="Kugelblitz"></category></entry></feed>
+&lt;p&gt;This 'scenario' is heavily based on a challenge question on the (Excellent) youtube channel:
+&lt;a href="https://www.youtube.com/channel/UC7_gcs09iThXybpVgjHZ_7g"&gt;PBS SpaceTime&lt;/a&gt;. In fact, I relied
+entirely on the answer I wrote and sent a few weeks before I
+started this blog. If you watch their challenge video, then you might have noticed that I did
+not even mention Newton's shell theorem even if it was talked about in the channel. Maybe I'm
+wrong, but I don't think Newton's shell theorem is relevant here at all to the reason Earth
+doesn't notice anything until the last moment. I've already talked about how the (admittedly
+theoretical) force carrier of gravity would also move at &lt;code&gt;c&lt;/code&gt; because it's a local phenomenon so the
+change in the geometry of space time would move along with the pulse of light. Furthermore, LIGO
+detected gravitatinal waves directly for the first time just last year, and I'm pretty sure they
+propagate at &lt;code&gt;c&lt;/code&gt;. I believe that makes my claim stronger, but please notify me if you have an
+alternative explanation, or a clarification.&lt;/p&gt;</content><category term="Physics"></category><category term="scifi"></category><category term="aliens"></category></entry></feed>
