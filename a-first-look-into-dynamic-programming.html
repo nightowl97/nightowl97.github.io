@@ -190,9 +190,9 @@ hundred thousand times. That means a lot of
 clock cycles wasted on redundant and completely
 unnecessary calculations. If <code>T(n)</code> is the time
 it takes to calculate the <code>fib(n)</code> then:</p>
-<p><code>T(n) = T(n - 1) + T(n - 2) = T(n - 2) + T(n - 3) + T(n - 3) + T(n - 4) ...</code></p>
+<div class="math">$$T(n) = T(n - 1) + T(n - 2) = T(n - 2) + T(n - 3) + T(n - 3) + T(n - 4)\ ...$$</div>
 <p>And so forth, each step calling T twice, which
-means: <code>T(n) = 2 * 2 * 2 * ... * 2 = 2ⁿ</code></p>
+means: <span class="math">\(T(n) = 2 * 2 * 2 * ... * 2 = 2ⁿ\)</span></p>
 <p>This is a time complexity <code>O(2ⁿ)</code> hence an
 exponential time algorithm. If you can help it,
 you should always try to avoid exponential time,
@@ -228,12 +228,12 @@ seems simple enough in principle, but how is
 that actually done? The problem with the first
 algorithm is the repetition. Each recursive
 call is costly, so we should only have to
-calculate each <code>n</code>-th number once. First thing
-that comes to mind is to just save each <code>fib(n)</code>
+calculate each <span class="math">\(n\)</span>-th number once. First thing
+that comes to mind is to just save each <span class="math">\(fib(n)\)</span>
 we compute, and cut off the recursion if we ever
-call the function on that same <code>n</code> later. Seems
+call the function on that same <span class="math">\(n\)</span> later. Seems
 simple right? That's exactly the way we're going
-to do it. Whenever the <code>fib</code> function is called,
+to do it. Whenever the <span class="math">\(fib\)</span> function is called,
 we will store its result in memory. Later when
 it's called with the same argument again,
 instead of recursing for a second time (again
@@ -260,11 +260,11 @@ implementation:</p>
 <p>In dynamic programming, we solve all the
 subproblems and use their results to solve
 our main problem. The "subproblems" in our
-case are the all the <code>fib(k)</code>s where <code>k &lt; n</code> and
+case are the all the <span class="math">\(fib(k)\)</span>s where <span class="math">\(k &lt; n\)</span> and
 we stored the result of each subproblem in
 memory for eventual reuse. It's also pretty
-clear that <code>T(n) = Time for each subproblem *
-Number of subproblems</code>. If you try and run this,
+clear that <span class="math">\(T(n) = \text{Time for each subproblem} *
+\text{Number of subproblems}\)</span>. If you try and run this,
 you're going to notice a gigantic jump in
 performance because this is now a linear time
 algorithm O(n). So much so that even I had
@@ -294,8 +294,9 @@ for a very big n, and it's possible to make a
 logarithmic time O(log n) algorithm using the
 closed form for fibonacci numbers, also known
 as Binet's formula:</p>
-<p><code>fib(n) = Floor([Phiⁿ / sqrt(5)] + 1/2)</code> where
-Phi is the gloden ratio</p>
+<div class="math">$$\text{fib}(n) = \text{floor}\left(\frac{\phi^n}{\sqrt{5} + \frac{1}{2}}\right)$$</div>
+<p> where
+<span class="math">\(\phi\)</span> is the gloden ratio</p>
 <p>You might think this is constant time but due
 to the powers in the formula, we need to use
 the <code>math.pow()</code> function, which is not O(1) like
@@ -307,6 +308,68 @@ might be slightly off if you decide to try it
 for yourself.</p>
 <p>That's about it for now, I hope you learned
 something with me today.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
   </div>
   <div class="tag-cloud">
     <p>

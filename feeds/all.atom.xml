@@ -67,9 +67,9 @@ hundred thousand times. That means a lot of
 clock cycles wasted on redundant and completely
 unnecessary calculations. If &lt;code&gt;T(n)&lt;/code&gt; is the time
 it takes to calculate the &lt;code&gt;fib(n)&lt;/code&gt; then:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;T(n) = T(n - 1) + T(n - 2) = T(n - 2) + T(n - 3) + T(n - 3) + T(n - 4) ...&lt;/code&gt;&lt;/p&gt;
+&lt;div class="math"&gt;$$T(n) = T(n - 1) + T(n - 2) = T(n - 2) + T(n - 3) + T(n - 3) + T(n - 4)\ ...$$&lt;/div&gt;
 &lt;p&gt;And so forth, each step calling T twice, which
-means: &lt;code&gt;T(n) = 2 * 2 * 2 * ... * 2 = 2ⁿ&lt;/code&gt;&lt;/p&gt;
+means: &lt;span class="math"&gt;\(T(n) = 2 * 2 * 2 * ... * 2 = 2ⁿ\)&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;This is a time complexity &lt;code&gt;O(2ⁿ)&lt;/code&gt; hence an
 exponential time algorithm. If you can help it,
 you should always try to avoid exponential time,
@@ -105,12 +105,12 @@ seems simple enough in principle, but how is
 that actually done? The problem with the first
 algorithm is the repetition. Each recursive
 call is costly, so we should only have to
-calculate each &lt;code&gt;n&lt;/code&gt;-th number once. First thing
-that comes to mind is to just save each &lt;code&gt;fib(n)&lt;/code&gt;
+calculate each &lt;span class="math"&gt;\(n\)&lt;/span&gt;-th number once. First thing
+that comes to mind is to just save each &lt;span class="math"&gt;\(fib(n)\)&lt;/span&gt;
 we compute, and cut off the recursion if we ever
-call the function on that same &lt;code&gt;n&lt;/code&gt; later. Seems
+call the function on that same &lt;span class="math"&gt;\(n\)&lt;/span&gt; later. Seems
 simple right? That's exactly the way we're going
-to do it. Whenever the &lt;code&gt;fib&lt;/code&gt; function is called,
+to do it. Whenever the &lt;span class="math"&gt;\(fib\)&lt;/span&gt; function is called,
 we will store its result in memory. Later when
 it's called with the same argument again,
 instead of recursing for a second time (again
@@ -137,11 +137,11 @@ implementation:&lt;/p&gt;
 &lt;p&gt;In dynamic programming, we solve all the
 subproblems and use their results to solve
 our main problem. The "subproblems" in our
-case are the all the &lt;code&gt;fib(k)&lt;/code&gt;s where &lt;code&gt;k &amp;lt; n&lt;/code&gt; and
+case are the all the &lt;span class="math"&gt;\(fib(k)\)&lt;/span&gt;s where &lt;span class="math"&gt;\(k &amp;lt; n\)&lt;/span&gt; and
 we stored the result of each subproblem in
 memory for eventual reuse. It's also pretty
-clear that &lt;code&gt;T(n) = Time for each subproblem *
-Number of subproblems&lt;/code&gt;. If you try and run this,
+clear that &lt;span class="math"&gt;\(T(n) = \text{Time for each subproblem} *
+\text{Number of subproblems}\)&lt;/span&gt;. If you try and run this,
 you're going to notice a gigantic jump in
 performance because this is now a linear time
 algorithm O(n). So much so that even I had
@@ -171,8 +171,9 @@ for a very big n, and it's possible to make a
 logarithmic time O(log n) algorithm using the
 closed form for fibonacci numbers, also known
 as Binet's formula:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;fib(n) = Floor([Phiⁿ / sqrt(5)] + 1/2)&lt;/code&gt; where
-Phi is the gloden ratio&lt;/p&gt;
+&lt;div class="math"&gt;$$\text{fib}(n) = \text{floor}\left(\frac{\phi^n}{\sqrt{5} + \frac{1}{2}}\right)$$&lt;/div&gt;
+&lt;p&gt; where
+&lt;span class="math"&gt;\(\phi\)&lt;/span&gt; is the gloden ratio&lt;/p&gt;
 &lt;p&gt;You might think this is constant time but due
 to the powers in the formula, we need to use
 the &lt;code&gt;math.pow()&lt;/code&gt; function, which is not O(1) like
@@ -183,7 +184,69 @@ computations with big numbers, so your results
 might be slightly off if you decide to try it
 for yourself.&lt;/p&gt;
 &lt;p&gt;That's about it for now, I hope you learned
-something with me today.&lt;/p&gt;</content><category term="Programming"></category><category term="Python"></category><category term="Recursion"></category></entry><entry><title>What would happen if aliens attack</title><link href="https://nightowl97.github.io/what-would-happen-if-aliens-attack.html" rel="alternate"></link><published>2017-01-19T00:00:00+00:00</published><updated>2017-01-19T00:00:00+00:00</updated><author><name>Youssef Kharchouf</name></author><id>tag:nightowl97.github.io,2017-01-19:/what-would-happen-if-aliens-attack.html</id><summary type="html">&lt;p&gt;What would happen if aliens tried to attack planet Earth with a Kugelblitz?&lt;/p&gt;</summary><content type="html">&lt;p&gt;What's a kugelblitz, you say?&lt;/p&gt;
+something with me today.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Programming"></category><category term="Python"></category><category term="Recursion"></category></entry><entry><title>What would happen if aliens attack</title><link href="https://nightowl97.github.io/what-would-happen-if-aliens-attack.html" rel="alternate"></link><published>2017-01-19T00:00:00+00:00</published><updated>2017-01-19T00:00:00+00:00</updated><author><name>Youssef Kharchouf</name></author><id>tag:nightowl97.github.io,2017-01-19:/what-would-happen-if-aliens-attack.html</id><summary type="html">&lt;p&gt;What would happen if aliens tried to attack planet Earth with a Kugelblitz?&lt;/p&gt;</summary><content type="html">&lt;p&gt;What's a kugelblitz, you say?&lt;/p&gt;
 &lt;p&gt;Let's start with the wikipedia definition:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;In theoretical physics, a kugelblitz (German: "ball lightning") is a concentration of light so
