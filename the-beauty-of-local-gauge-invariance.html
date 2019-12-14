@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Youssef Kharchouf" />
+<meta name="description" content="One of the most interesting things you&#39;ll see in physics is that symmetry and beauty give rise to the fundamental forces of nature." />
+<meta name="keywords" content="theoretical physics, gauge theories, electromagnetism, quantum electrodynamics">
+
+
+<meta property="og:site_name" content="Youssef's Thoughts"/>
+<meta property="og:title" content="The beauty of Local Gauge Invariance"/>
+<meta property="og:description" content="One of the most interesting things you&#39;ll see in physics is that symmetry and beauty give rise to the fundamental forces of nature."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./the-beauty-of-local-gauge-invariance.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-12-12 00:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/youssef-kharchouf.html">
+<meta property="article:section" content="Theoretical Physics"/>
+<meta property="article:tag" content="theoretical physics"/>
+<meta property="article:tag" content="gauge theories"/>
+<meta property="article:tag" content="electromagnetism"/>
+<meta property="article:tag" content="quantum electrodynamics"/>
+<meta property="og:image" content="images/prof.jpg">
+
+  <title>Youssef's Thoughts &ndash; The beauty of Local Gauge Invariance</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="images/prof.jpg" alt="Youssef's Thoughts" title="Youssef's Thoughts">
+      </a>
+      <h1><a href=".">Youssef's Thoughts</a></h1>
+
+<p>Personal notes and writings</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="./pages/about.html#about">About</a></li>
+            <li><a target="_blank" href="./pages/contact.html#contact">Contact</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/nightowl97" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-facebook" href="facebook.com/you.fg" target="_blank">
+            <i class="fab fa-facebook">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/4203245/youssef-khar" target="_blank">
+            <i class="fab fa-stack-overflow">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="the-beauty-of-local-gauge-invariance">The beauty of Local Gauge Invariance</h1>
+    <p>
+          Posted on jeu. 12 décembre 2019 in <a href="./category/theoretical-physics.html">Theoretical Physics</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Our current understanding of the fundamental nature of reality is deeply tied with the concept of symmetry.
+One of my favourite mathematicians is Emmy Noether. Her theorem, which states that to
+every symmetry that exists in any laws of physics is associated to a conserved quantity, is one of the most
+beautiful and fundamental statements in all of physics. In fact, there is an entire field in mathematics
+that studies the sets of transformations (or groups) that act on a certain space X while still leaving it
+invariant, it's called <em>Group Theory</em> and it is essential to <strong>Standard Model of Particle physics</strong>
+which is based on what is called <em>Gauge theories</em>.</p>
+<blockquote>
+<p>In physics, a gauge theory is a type of field theory in which the Lagrangian does not change (is invariant)
+under local transformations from certain Lie groups</p>
+<p>-- <cite>Wikipedia</cite></p>
+</blockquote>
+<p>Given a certain Lagrangian density (for a free fermion field <span class="math">\(\psi\)</span> for example), one could attempt to
+find the sets of different transformations in which it is invariant. In this post we will do just that
+and see that it leads to surprising results!</p>
+<h2>Global Symmetry</h2>
+<p>Let's start simple. The Lagrangian density of a Dirac Bi-spinor field is:
+</p>
+<div class="math">$$\cal{L}_{\textit{Dirac}} = \hbar c \overline{\psi} \gamma^\mu \partial_\mu \psi + mc^2\overline{\psi}\psi$$</div>
+<p>
+Applying the Euler-Lagrange equations would give us the famous <em>Dirac Equation</em>, but we're not interested
+in that right now. We want to see if there are any transformations which leave this Lagrangian invariant.
+To start off, we'll try one of the simplest possible transformations, a global phase-shift. This
+basically amounts to changing the phase of the field by the same amount everywhere and is equivalent
+to rotating around the unit circle in complex space: </p>
+<div class="math">$$\psi \rightarrow \psi' = e^{iq\phi}\psi$$</div>
+<p>
+A minor detail that we will need is that the Dirac adjoint is defined as <span class="math">\(\overline{\psi} = i \psi^\dagger
+\gamma^0\)</span> and it transforms like so:</p>
+<div class="math">$$\overline{\psi} \rightarrow \overline{\psi}' = \overline{\psi} e^{-iq\phi}$$</div>
+<p>Plugging this new transformed field in to the Lagrangian:
+</p>
+<div class="math">$$\cal{L}' = \hbar c \overline{\psi}' \gamma^\mu \partial_\mu \psi' + mc^2\overline{\psi}'\psi'$$</div>
+<div class="math">$$\cal{L}' = \hbar c \overline{\psi} e^{-iq\phi} \gamma^\mu \partial_\mu e^{iq\phi}\psi + mc^2 \overline{\psi} e^{-iq\phi} e^{iq\phi} \psi$$</div>
+<p>Now <span class="math">\(e^{iq\phi}\)</span> and <span class="math">\(e^{-iq\phi}\)</span> are just complex phases and have no spacetime dependance so we can
+just move them next to eachother, they cancel out and our Lagrangian is invariant:
+</p>
+<div class="math">$$\cal{L}' = \hbar c \overline{\psi} \gamma^\mu \partial_\mu \psi + mc^2\overline{\psi}\psi = \cal{L}$$</div>
+<h2>Local Symmetry</h2>
+<p>It turns out our Lagrangian is already symmetric under this global transformation, but it doesn't take
+us very far. <em>Gauge theories</em> for some reason arise when we try to enforce symmetry under <strong>Local
+Transformations</strong>. Let's what that looks like:
+</p>
+<div class="math">$$\psi \rightarrow \psi' = e^{iq\phi(x^\mu)}\psi \qquad \overline{\psi} \rightarrow \overline{\psi}' = \overline{\psi} e^{-iq\phi(x^\mu)}$$</div>
+<p>In a way this is a "stronger" constraint because we could just get back the global transformation by
+using a constant <span class="math">\(\phi(x^\mu)\)</span>. But now our transformation can be local because it depends on where we
+are in spacetime. Depending on the function <span class="math">\(\phi(x^\mu)\)</span>, we could really mess up the <span class="math">\(\psi\)</span> field.
+I can already hear you mumbling <em>"that's all well and good but what the blazes is that gonna achieve?"</em>,
+but let's try it anyway:</p>
+<div class="math">$$\mathcal{L}' = \hbar c \overline{\psi} e^{-iq\phi(x^\mu)} \gamma^\mu \partial_\mu e^{iq\phi(x^\mu)}\psi + mc^2 \overline{\psi} e^{-iq\phi(x^\mu)} e^{iq\phi(x^\mu)} \psi$$</div>
+<div class="math">$$\mathcal{L}' = \hbar c \overline{\psi} e^{-iq\phi(x^\mu)} \gamma^\mu \partial_\mu(e^{iq\phi(x^\mu)}\psi) + mc^2 \overline{\psi} \psi$$</div>
+<div class="math">$$\mathcal{L}' = \hbar c \overline{\psi} e^{-iq\phi(x^\mu)} \gamma^\mu e^{iq\phi(x^\mu)} \partial_\mu\psi + iq\hbar c \overline{\psi} e^{-iq\phi(x^\mu)} \gamma^\mu e^{iq\phi(x^\mu)} \partial_\mu\phi(x^\mu) \psi + mc^2 \overline{\psi} \psi$$</div>
+<p>
+Not so good but let's go further..
+</p>
+<div class="math">$$\mathcal{L}' = \hbar c \overline{\psi} \gamma^\mu \partial_\mu\psi + iq\hbar c \overline{\psi} \gamma^\mu \partial_\mu\phi(x^\mu) \psi + mc^2 \overline{\psi} \psi$$</div>
+<p>So the mass term is invariant just like before, but now since the phase-shift depends on position, we cannot
+simply move it past the derivative <span class="math">\(\partial_\mu\)</span> like last time, we get that pesky middle term with
+<span class="math">\(\partial_\mu\phi(x^\mu)\)</span>. Seems like a bust, unless..</p>
+<hr>
+<p>Let's do something crazy, we clearly have an issue with <span class="math">\(\partial_\mu\)</span> so let's mess it up in just the right
+way. Introducing <span class="math">\(D_\mu = \partial_\mu + iqA_\mu\)</span> where <span class="math">\(A_\mu \rightarrow A_\mu '\)</span>. The Lagrangian becomes:
+</p>
+<div class="math">$$\mathcal{L} =\hbar c \overline{\psi} \gamma^\mu \partial_\mu\psi + iq\hbar c \overline{\psi} \gamma^\mu A_\mu \psi + mc^2 \overline{\psi} \psi$$</div>
+<p>
+We can clearly make this invariant if: <span class="math">\(A_\mu \rightarrow A_\mu ' = A_\mu - \partial_\mu \phi(x^\mu)\)</span>
+Using the same process as before:</p>
+<div class="math">$$\mathcal{L'} = \hbar c \overline{\psi} \gamma^\mu \partial_\mu\psi + iq\hbar c \overline{\psi} \gamma^\mu A_\mu \psi + iq\hbar c \overline{\psi} \gamma^\mu \partial_\mu \phi(x^\mu) \psi - iq\hbar c \overline{\psi} \gamma^\mu \partial_\mu \phi(x^\mu) \psi + mc^2 \overline{\psi} \psi$$</div>
+<div class="math">$$\mathcal{L'} =\hbar c \overline{\psi} \gamma^\mu \partial_\mu\psi + iq\hbar c \overline{\psi} \gamma^\mu A_\mu \psi + mc^2 \overline{\psi} \psi = \mathcal{L}$$</div>
+<p>So we managed to make the Lagrangian invariant but look! The new field is interacting with our
+Dirac field in the term <span class="math">\(iq\hbar c \overline{\psi} \gamma^\mu A_\mu \psi\)</span>, and there's a weird coupling
+constant <span class="math">\(q\)</span> dictating the strength of the interaction. What does this mean?</p>
+<p>We do know of a field that behaves in this specific way.</p>
+<p>Behold! The <strong>Electromagnetic Field</strong>!
+In fact, <span class="math">\(A_\mu\)</span> is the <em>E&amp;M</em> four-potential <span class="math">\(A^\mu = (\phi, \vec{A})\)</span>. The weird constant <span class="math">\(q\)</span> is nothing
+but <strong>electric charge</strong>! It seems obvious now that it should be the coupling strength of the <em>E&amp;M</em> field
+with the Dirac field. We insisted on a symmetry we had no right to, and rediscovered electromagnetism
+in its quantum nature. Isn't that mindblowing?</p>
+<h2>Tying up some loose ends</h2>
+<p>Since <span class="math">\(A_\mu\)</span> is now a field itself, it needs to play by the rules of Special Relativity, a.k.a obey
+the Klein-Gordon equation which arises from the Proca Lagrangian:
+</p>
+<div class="math">$$\mathcal{L}_\textit{Proca} = \frac{1}{16\pi} F_{\mu\nu} F^{\mu\nu} + \frac{1}{8\pi} (\frac{mc^2}{\hbar}) A^\mu A_\mu$$</div>
+<p>
+The first term is already invariant, but we need to eliminate the second term to make the whole Lagrangian
+invariant by setting <span class="math">\(m = 0\)</span>. This is to be expected because excitations in the E&amp;M field (a.k.a photons)
+are massless. Hence, our new full-blown Lagrangian of <strong>Quantum Electrodynamics</strong> is:
+</p>
+<div class="math">$$\mathcal{L}_\text{QED} = \hbar c \overline{\psi} \gamma^\mu \partial_\mu\psi + iq\hbar c \overline{\psi} \gamma^\mu A_\mu \psi + mc^2 \overline{\psi} \psi + \frac{1}{16\pi} F_{\mu\nu} F^{\mu\nu}$$</div>
+<p>
+We can construct the well known antisymmetric <em>Electromagnetic Field Tensor</em> as follows:
+</p>
+<div class="math">$$F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$$</div>
+<p>
+When we imposed <span class="math">\(A_\mu \rightarrow A_\mu ' = A_\mu - \partial_\mu(\phi)\)</span>, that is nothing but the Lorenz
+Gauge condition from classical electrodynamics.</p>
+<p>Just for the sake of closure, and because you can never go wrong with them, Maxwell's equations
+can be pulled from the QED Lagrangian by applying the Euler-Lagrange equations for <span class="math">\(A_\mu\)</span>
+where the four-current is defined as <span class="math">\(J^\mu = (c\rho, \vec{j})\)</span>:
+</p>
+<div class="math">$$\partial_\mu F^{\alpha \beta} = \mu_0 J^{\beta}$$</div>
+<h2>Epilogue</h2>
+<p>Let's recap, we started with a simple free Lagrangian density which was already symmetric under global
+phase shifts. We tried to impose local gauge symmetry which, a priori, we have no right to expect should
+work. It turns out, this local gauge symmetry imposes the conservation of a certain quantity, and that is
+electric charge.</p>
+<p>We tried one trick and we got the Electromagnetic field, Electric charge, Quantum Electrodynamics and the kitchen sink!</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/theoretical-physics.html">theoretical physics</a>
+      <a href="./tag/gauge-theories.html">gauge theories</a>
+      <a href="./tag/electromagnetism.html">electromagnetism</a>
+      <a href="./tag/quantum-electrodynamics.html">quantum electrodynamics</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Youssef's Thoughts ",
+  "url" : ".",
+  "image": "images/prof.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
