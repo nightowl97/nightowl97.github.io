@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "nightowl97.zizgo",
+        "sha256_cert_fingerprints": ["18:C9:76:9E:E3:47:2F:CB:80:D6:7A:6C:9A:3D:A2:6B:5A:82:2A:E6:D6:92:70:B3:CF:32:A1:B8:E8:6B:A8:40"]
+      }
+    }]
